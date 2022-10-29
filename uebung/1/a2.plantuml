@@ -1,18 +1,18 @@
 @startuml Wiederholung Objektdiagramme
 object Leser
+object Hans_Müller
+Hans_Müller : Addresse = Bochum
+Hans_Müller : Geburtstag = 01.03.1995
+Hans_Müller : Ausleihe = 1
+Hans_Müller : Rückgabedatum = 20.05.2014
 
-object "Hans Müller"
-"Hans Müller" : Addresse = Bochum
-"Hans Müller" : Geburtstag = 01.03.1995
-"Hans Müller" : Ausleihe = 1
-"Hans Müller" : Rückgabedatum = 20.05.2014
+object Else_Wallersee
+Else_Wallersee : Addresse = Dortmund
+Else_Wallersee : Geburtstag = 26.03.1948
+Else_Wallersee : Ausleihe = 2, 3
+Else_Wallersee : Rückgabedatum = 21.05.2014
 
-object "Else Wallersee"
-"Else Wallersee" : Addresse = Dortmund
-"Else Wallersee" : Geburtstag = 26.03.1948
-"Else Wallersee" : Ausleihe = 2, 3
-"Else Wallersee" : Rückgabedatum = 21.05.2014
+Leser -- Hans_Müller
+Leser -- Else_Wallersee
 
-Leser -- "Hans Müller"
-Leser -- "Else Wallersee"
 @enduml
