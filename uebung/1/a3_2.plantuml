@@ -1,0 +1,9 @@
+@startuml Übungseinheit 1 Aufgabe 3 b
+class Konto
+class Kunde {
+    Kontoinhaber : boolean
+    Kontoberechtiget : boolean
+}
+
+Konto o-- Kunde
+@enduml

@@ -1,0 +1,14 @@
+@startuml Übungseinheit 1 Aufgabe 4
+class LKW
+class PKW
+class Student
+class Vorlesung
+class Studentenausweis
+class Person 
+
+LKW "1" -- "*" PKW : transportiert
+Student "1" -- "*" Vorlesung : besucht
+Student "1" o-- "1" Studentenausweis : hat
+Person "1" -- "1" Person : vermietet 
+
+@enduml

@@ -1,0 +1,5 @@
+@startuml Übungseinheit 1 Aufgabe 3 a 
+class Angestellter
+
+Angestellter "1" *-- "*" Angestellter : Chef >
+@enduml
