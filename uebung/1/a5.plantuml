@@ -1,0 +1,35 @@
+@startuml Übungseinheit 1 Aufgabe 5
+class "Geschäftspartner" as GP {
+   #Addresse:Addresse
+   #Bankverbindung:Bankverbindung
+   #Name:String
+}
+
+class Addresse{
+    -PLZ:Integer 
+    -Straße:String 
+    -Hausnummer:Integer
+    -Ort:String
+}
+
+class Bankverbindung{
+    -Kontonummer:Integer
+    -BLZ:Integer
+}
+class "Natürliche Person" as NP{
+    -Vorname:String
+    -Name:String
+    -Anrede:String
+    -Geburtstag:String
+}
+class "Organisation" as Org {
+    -Rechtsform:String
+}
+
+GP "1" <-- "1..*" Addresse
+GP "1" -- "1" Bankverbindung
+GP <|-- NP
+GP <|-- Org
+Org "1" --> "1" NP : benennt als Kontakt
+
+@enduml
