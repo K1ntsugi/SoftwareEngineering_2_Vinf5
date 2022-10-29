@@ -1,18 +1,39 @@
 @startuml Wiederholung Objektdiagramme
-object Leser
-object Hans_Müller
-Hans_Müller : Addresse = Bochum
-Hans_Müller : Geburtstag = 01.03.1995
-Hans_Müller : Ausleihe = 1
-Hans_Müller : Rückgabedatum = 20.05.2014
+object "__Leser:Hans Müller__" as HM{
+Addresse = Bochum
+Geburtstag = 01.03.1995
+Ausleihe = 1
+Rückgabedatum = 20.05.2014
+}
 
-object Else_Wallersee
-Else_Wallersee : Addresse = Dortmund
-Else_Wallersee : Geburtstag = 26.03.1948
-Else_Wallersee : Ausleihe = 2, 3
-Else_Wallersee : Rückgabedatum = 21.05.2014
+object "__Leser:Else Wallersee__" as EW{
+Addresse = Dortmund
+Geburtstag = 26.03.1948
+Ausleihe = 2, 3
+Rückgabedatum = 21.05.2014
+}
 
-Leser -- Hans_Müller
-Leser -- Else_Wallersee
+object "__Buch:1__" as 1{
+Autor = Ken Follet
+Titel = Die Säulen der Erde 
+Erschienen = 1990
+}
+
+object "__Buch:2__" as 2{
+Autor = Ken Follet
+Titel = Die Säulen der Erde 
+Erschienen = 1990
+}
+
+object "__Buch:3__" as 3{
+Autor = Ken Follet
+Titel = Die Säulen der Erde 
+Erschienen = 1990
+}
+
+HM o-- 1 : hat
+EW o-- 2 : hat
+EW o-- 3 : hat
 
 @enduml
+
