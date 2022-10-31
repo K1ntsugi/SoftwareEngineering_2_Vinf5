@@ -1,0 +1,21 @@
+@startuml bungseinheit 1 Aufgabe 8
+
+activate Antragssteller
+Antragssteller -> Antrag : stelleAntrag()
+activate Antrag
+loop 10 Mal
+    Antrag --> Antrag : <<static>> hasMoreUnbeantrageLeistungen()
+    Antrag --> Antrag : tryAddLeistung(getNextLeistung())
+    Antrag --> Antrag : erstattungsAntrag.getSumLeistungen()
+    alt sum<=1000
+        Antrag --> Antrag : cancel()
+        Antrag --> Antragssteller
+    end
+
+activate Antrag
+    alt Math.random()<=0.5
+        Antrag --> Antrag : setBemerkung("Bemerkung")
+        return
+    end
+end 
+@enduml

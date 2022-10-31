@@ -1,12 +1,12 @@
 @startuml bungseinheit 1 Aufgabe 7
-
-Customer -> Getränk ++ : bestellt
+Customer ++
+Customer-> Getränk ++ : bestellt
 Getränk -> Decorator : kennt Getränke zur Auswahl
-Decorator -> "Konkreter Decorator" : bestimmt
-Getränk <- "Konkreter Decorator" : Konkretes Getränk ausgewählt
+Decorator -> "Konkreter Decorator" ++: bestimmt
+Getränk <-- "Konkreter Decorator" --: Konkretes Getränk ausgewählt
 Getränk -> Component : kennt die Addons
-Component -> "Konkretes Component" : Addon wir gewählt
-Getränk <- "Konkretes Component" : Addon wird hinzugefügt
+Component -> "Konkretes Component" ++: Addon wir gewählt
+Getränk <-- "Konkretes Component" -- : Addon wird hinzugefügt
 Customer <- Getränk : erhält
 
 @enduml
