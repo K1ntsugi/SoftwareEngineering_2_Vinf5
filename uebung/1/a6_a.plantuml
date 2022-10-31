@@ -1,0 +1,21 @@
+@startuml Übungseinheit 1 Aufgabe 6 - Generalisierung
+class "Getränk" as GT {
+    #hotMilk:boolean
+    #choco:boolean
+    #soja:boolean
+    #milkFoam:boolean
+    #price:float
+    +void computePrice(boolean hotMilk, boolaen choco, boolaen soja, boolaen milkFoam)
+}
+
+class "Espresso" as ES 
+class "Entkoffeiniert" as DECAF
+class "Dunkle Röstung" as DARK 
+class "Standard" as STD
+
+GT <|-- ES
+GT <|-- DECAF
+GT <|-- DARK
+GT <|-- STD
+
+@enduml
