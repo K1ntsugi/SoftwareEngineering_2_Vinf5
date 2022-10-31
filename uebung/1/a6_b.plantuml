@@ -3,7 +3,7 @@
 interface "Getränk" as Decorator
 abstract class "Getränk Addon" as Component
 
-class "Heiße Milch" as class "Heiße Milch" as Concrete_Component_1
+class "Heiße Milch" as Concrete_Component_1
 class "Schoko" as Concrete_Component_2
 class "Soja" as Concrete_Component_3
 class "Milchschaum" as Concrete_Component_4
