@@ -1,21 +1,38 @@
 @startuml bungseinheit 1 Aufgabe 8
 
-activate Antragssteller
-Antragssteller -> Antrag : stelleAntrag()
-activate Antrag
-loop 10 Mal
-    Antrag --> Antrag : <<static>> hasMoreUnbeantrageLeistungen()
-    Antrag --> Antrag : tryAddLeistung(getNextLeistung())
-    Antrag --> Antrag : erstattungsAntrag.getSumLeistungen()
-    alt sum<=1000
-        Antrag --> Antrag : cancel()
-        Antrag --> Antragssteller
-    end
+actor Antragsteller
+participant Antrag
+participant Versicherung
 
+activate Antragsteller
 activate Antrag
-    alt Math.random()<=0.5
-        Antrag --> Antrag : setBemerkung("Bemerkung")
+
+loop 10 Mal
+    Antragsteller --> Antragsteller : hasMoreUnbetragteLeistungen()
+    alt hasMoreUnbetragteLeistungen
+        Antragsteller --> Antragsteller : getNextLeistung()
+        Antragsteller --> Antrag : tryAddLeistung(nextLeistung)
+        Antrag --> Versicherung : isErstattbar(leistung)
+        activate Versicherung
         return
+        deactivate Versicherung
+        alt istErstattbar
+            Antrag --> Antrag : addLeistung(leistung)
+        end
     end
-end 
+end
+
+Antragsteller --> Antrag : getSumLeistungen()
+activate Antrag
+return sum
+
+alt sum <= 1000
+    Antragsteller --> Antrag : cancel()
+else
+    Antragsteller --> Antrag : submit()
+end
+
+alt Math.random() <= 0.5
+    Antragsteller --> Antrag : setBemerkung("Bemerkung")
+end
 @enduml

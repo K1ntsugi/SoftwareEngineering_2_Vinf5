@@ -1,7 +1,7 @@
 @startuml Übungseinheit 1 Aufgabe 6 - Decorator
 
 interface "Getränk" as Decorator
-abstract class "Getränk Addon" as Component
+abstract class "Addon" as Component
 
 class "Heiße Milch" as Concrete_Component_1
 class "Schoko" as Concrete_Component_2
