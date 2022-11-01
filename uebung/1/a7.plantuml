@@ -1,4 +1,4 @@
-@startuml bungseinheit 1 Aufgabe 7
+@startuml Übungseinheit 1 Aufgabe 7
 Customer ++
 Customer-> Getränk ++ : bestellt
 Getränk -> Decorator : kennt Getränke zur Auswahl

@@ -1,0 +1,28 @@
+@startuml Übungseinheit 1 Aufgabe 9
+
+
+skinparam ComponentStyle rectangle
+
+interface "Main" as Main
+component Antragsteller as Antragsteller
+component Antrag as Antrag
+component Versicherung as Versicherung
+
+Main -> Antragsteller : 1. stelleAntrag
+Antragsteller -> Antrag : 2.1a tryAddLeistung
+' Antragsteller --> Antragsteller : 2.1b
+
+Antrag -> Versicherung : 2.2 isErstattbar
+' Versicherung --> Antrag : 2.3
+
+Antrag -> Antrag : 2.4a addLeistung
+' Antrag --> Antrag : 2.4b
+
+Antragsteller -> Antrag : 3. getSumLeistungen
+Antragsteller -> Antrag : 3.1a cancel
+Antragsteller -> Antrag : 3.1b submit
+
+Antragsteller -> Antrag : 4a setBemerkung
+
+
+@enduml

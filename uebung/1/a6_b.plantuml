@@ -1,17 +1,17 @@
 @startuml Übungseinheit 1 Aufgabe 6 - Decorator
 
-interface "Getränk" as Decorator
-abstract class "Addon" as Component
+interface "Addon" as Decorator
+abstract class "Getränk" as Component
 
-class "Heiße Milch" as Concrete_Component_1
-class "Schoko" as Concrete_Component_2
-class "Soja" as Concrete_Component_3
-class "Milchschaum" as Concrete_Component_4
+class "Heiße Milch" as Concrete_Decorator_1
+class "Schoko" as Concrete_Decorator_2
+class "Soja" as Concrete_Decorator_3
+class "Milchschaum" as Concrete_Decorator_4
 
-class "Espresso" as Concrete_Decorator_1 
-class "Entkoffeiniert" as Concrete_Decorator_2
-class "Dunkle Röstung" as Concrete_Decorator_3
-class "Standard" as Concrete_Decorator_4
+class "Espresso" as Concrete_Component_1
+class "Entkoffeiniert" as Concrete_Component_2
+class "Dunkle Röstung" as Concrete_Component_3
+class "Standard" as Concrete_Component_4
 
 
 Decorator o-- Component
