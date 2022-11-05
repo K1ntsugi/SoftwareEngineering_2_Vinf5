@@ -1,14 +1,15 @@
 @startuml Uebungseinheit 2 - Aufgabe 1
 
 == 1 ==
-Autofahrer ->> Max : hupt an
 activate Autofahrer
+Autofahrer ->> Max : hupt an
+deactivate Autofahrer
+
 activate Max
 note right : Asynchroner Aufruf. \nAutofahrer blockieren normalerweise nicht alle I/O-Prozesse bis ihr Hupenn erwiedert wird
 Max -> Max++ : ist genervt
 Max -> Max-- : beschießt zurückzuhupen
 Max -->> Autofahrer : hupt zurück
-deactivate Autofahrer
 
 == 2 ==
 Sandra -> Max : ruft an + Frage: Wann kommst du nach Hause? 

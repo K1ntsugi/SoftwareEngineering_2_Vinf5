@@ -1,0 +1,87 @@
+@startuml Uebungseinheit 2 - Aufgabe 2
+
+Sound : Beep
+
+Switch1 : Set Time 
+Switch2 : Set Date
+Switch3 : Increment
+Switch4 : Confirm
+
+Z0 : Start
+Z1 : Uhrzeit anzeigen
+Z2 : Datum anzeigen
+Z3 : Stunden konfigurieren
+Z4 : Minuten konfigurieren
+Z5 : Jahr konfigurieren
+Z6 : Monat konfigurieren
+Z7 : Tag konfigurieren
+
+Reset : Set config-item to 0
+SetTime : Start config Time
+SetDate : Switch2 pressed
+
+state timeLimit <<choice>>
+state switchPressed <<choice>>
+state dateLimit <<choice>>
+
+
+[*] --> Z0
+Z0 --> Z1
+Z1 --> Z2 : 1 Sek.
+Z2 --> Z1 : 1 Sek.
+
+Z1 --> Switch1 : push
+Z2 --> Switch1 : push
+Switch1 --> Sound
+switchPressed -> SetTime : SetTime pressed
+SetTime --> Z3 
+
+Z3 --> Switch3 : push
+Switch3 --> timeLimit
+timeLimit --> Reset : Stunde > 23
+Reset --> Z3
+timeLimit --> Z3 : Stunde <= 23
+
+Z3 --> Switch4 : push
+Switch4 --> Sound
+Sound --> Z4
+Z4 --> Switch3 : push
+timeLimit --> Reset : Minute > 59
+Reset --> Z4
+timeLimit --> Z4 : Minute <= 59
+Z4 --> Switch4 : push
+
+Sound --> switchPressed
+switchPressed --> Z0 : Switch 4 pushed
+
+
+
+Z1 --> Switch2 : push
+Z2 --> Switch2 : push
+Switch2 --> Sound
+switchPressed --> SetDate : SetDate pressed
+
+SetDate --> Z5
+Z5 --> Switch3
+Switch3 --> dateLimit
+dateLimit --> Z5 : [Jahr >= 1985 || Jahr <= 3000]
+dateLimit --> Reset : [Jahr < 1985 || Jahr < 3000]
+Reset --> Z5
+Z5 --> Switch4
+
+switchPressed --> Z6 : Jahr koniguriert
+Z6 --> Switch3
+dateLimit --> Z6 : [Monat <=12]
+dateLimit --> Reset : [Montat > 12]
+Reset --> Z6
+Z6 --> Switch4
+
+switchPressed --> Z7 : Tag koniguriert
+Z7 --> Switch3
+
+dateLimit --> Z7 : [Tag <= 31]
+dateLimit --> Reset : [Tag > 31]
+Reset --> Z7
+Z7 --> Switch4
+
+@enduml
