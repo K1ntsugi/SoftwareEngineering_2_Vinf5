@@ -1,0 +1,33 @@
+@startuml Uebungseinheit 2 - Aufgabe 1
+
+== 1 ==
+Autofahrer ->> Max : hupt an
+activate Autofahrer
+activate Max
+note right : Asynchroner Aufruf. \nAutofahrer blockieren normalerweise nicht alle I/O-Prozesse bis ihr Hupenn erwiedert wird
+Max -> Max++ : ist genervt
+Max -> Max-- : beschießt zurückzuhupen
+Max -->> Autofahrer : hupt zurück
+deactivate Autofahrer
+
+== 2 ==
+Sandra -> Max : ruft an + Frage: Wann kommst du nach Hause? 
+activate Sandra
+activate Max
+Max --> Sandra : Antwort: Stehe im Stau, komme später.
+deactivate Max
+deactivate Sandra
+== 3 == 
+
+Max -> Max++ : checkt EMails (öffent Mail-CLient)
+Max -> Max++ : liest Einladung von Franz (öffnet Mail)
+Max -> Max-- : schließt Mail
+Max -> Max++ : Öffnet "Verfassen" in Mail-Client
+Max ->> Franz++ : Sagt Einladung zu
+Max -> Max-- : Nachricht versendet
+Max -> Max-- : Schließt Mail-Client
+...5 Minuten später...
+Franz -->> Max : erhält genaue Addresse
+deactivate Franz
+deactivate Max
+@enduml
