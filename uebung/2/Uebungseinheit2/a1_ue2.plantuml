@@ -19,7 +19,7 @@ deactivate Max
 deactivate Sandra
 == 3 == 
 
-Max -> Max++ : checkt EMails (öffent Mail-CLient)
+Max -> Max++ : checkt EMails (öffent Mail-Client)
 Max -> Max++ : liest Einladung von Franz (öffnet Mail)
 Max -> Max-- : schließt Mail
 Max -> Max++ : Öffnet "Verfassen" in Mail-Client
