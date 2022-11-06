@@ -1,0 +1,40 @@
+@startuml Uebungseinheit 3 - Aufgabe 1
+
+Participant "Calling Class" as Caller
+Participant "PersonsListViewModel" as PLVM
+Participant "person:ObservableList<Person>" as persons
+Participant "selectedIndex:IntegerProperty" as selectedIndex
+Participant "personsWithIndexSelected:BooleanProperty" as personsWithIndexSelected
+Participant "Bindings" as BD
+
+Caller -> PLVM++ : <<create>>
+PLVM --> persons++ : <<create>> FXCollections.observableArrayList()
+PLVM --> selectedIndex++ : <<create>> new IntegerProperty
+PLVM --> personsWithIndexSelected++ : <<create>> new SimpleBooleanProperty(false)
+
+PLVM -> PLVM++ : new PersonsListViewModel
+PLVM -> persons++ : add()
+persons -> persons : new Persons("Chris", "Test", "chris.test@xyz.com")
+persons --> PLVM 
+persons--
+
+PLVM -> selectedIndex++ : bind()
+selectedIndex -> selectedIndex : selectedIndex.greaterThanOrEqualTo(0)
+selectedIndex --> PLVM
+selectedIndex--
+
+PLVM -> PLVM++ : bind()
+alt personsWithIndexSelected
+PLVM -> BD++ : when()
+    BD --> personsWithIndexSelected: "Edit"
+    personsWithIndexSelected --> PLVM
+    PLVM --> Caller
+else 
+    BD --> personsWithIndexSelected: "Create"
+    personsWithIndexSelected --> PLVM
+    PLVM --> Caller
+end
+PLVM--
+PLVM--
+PLVM--
+@enduml 
