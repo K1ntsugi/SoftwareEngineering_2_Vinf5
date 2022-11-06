@@ -1,0 +1,52 @@
+@startuml Uebungseinheit 2 - Aufgabe 2
+'States
+Entrypoint :
+Sound : Beep
+Reset : Set config-item to 0
+Z1 : Uhrzeit anzeigen
+Z2 : Datum anzeigen
+Z3 : Stunden konfigurieren
+Z4 : Minuten konfigurieren
+Z5 : Jahr konfigurieren
+Z6 : Monat konfigurieren
+Z7 : Tag konfigurieren
+
+'Switches
+SetTime : Switch
+SetDate : Switch
+Increment : Switch
+Confirm : Switch
+
+' Flow Control
+state switchCase <<choice>>
+state setHoursIf <<choice>>
+state setMinutesIf <<choice>>
+state setYearIf <<choice>>
+state setMonthIf <<choice>>
+state setDaysIf <<choice>>
+'#################################
+' Init
+[*] -> Entrypoint
+Entrypoint -> Z1
+' Anzeige-Loop
+Z1 -> Z2 : (1s)
+Z2 -> Z1 : (1s)
+
+'Übergang SetTime
+Z1 -> SetTime
+Z2 -> SetTime
+SetTime -> Sound
+'Switch case init
+Sound -> switchCase : switch[state]
+'Übergang SetDate
+Z1 -> SetDate
+Z2 -> SetDate
+SetDate -> Sound
+
+' SetTime
+switchCase -> Z3 : [SetTime]
+' SetDate
+switchCase -> Z5 : [SetDate]
+' Return after Config
+
+@enduml
