@@ -1,8 +1,10 @@
 @startuml Uebungseinheit 2 - Aufgabe 2
+hide empty description
 'States
 Entrypoint :
 Sound : Beep
 Reset : Set config-item to 0
+ConfirmedState : Chaches State
 Z1 : Uhrzeit anzeigen
 Z2 : Datum anzeigen
 Z3 : Stunden konfigurieren
@@ -18,35 +20,109 @@ Increment : Switch
 Confirm : Switch
 
 ' Flow Control
-state switchCase <<choice>>
+state switchCaseBeep <<choice>>
+state switchCaseConfirm <<choice>>
+state switchReset <<choice>>
 state setHoursIf <<choice>>
 state setMinutesIf <<choice>>
 state setYearIf <<choice>>
 state setMonthIf <<choice>>
-state setDaysIf <<choice>>
+state setDayIf <<choice>>
 '#################################
 ' Init
-[*] -> Entrypoint
-Entrypoint -> Z1
+[*] --> Entrypoint
+Entrypoint --> Z1
 ' Anzeige-Loop
-Z1 -> Z2 : (1s)
-Z2 -> Z1 : (1s)
+Z1 ---> Z2 : (1s)
+Z2 ---> Z1 : (1s)
 
 'Übergang SetTime
-Z1 -> SetTime
-Z2 -> SetTime
-SetTime -> Sound
+Z1 ---> SetTime
+Z2 ---> SetTime
+SetTime --> Sound
 'Switch case init
-Sound -> switchCase : switch[state]
+Sound --> switchCaseBeep : switch[Sound]
 'Übergang SetDate
-Z1 -> SetDate
-Z2 -> SetDate
-SetDate -> Sound
+Z1 --> SetDate
+Z2 --> SetDate
+SetDate --> Sound
 
 ' SetTime
-switchCase -> Z3 : [SetTime]
-' SetDate
-switchCase -> Z5 : [SetDate]
-' Return after Config
+switchCaseBeep --> Z3 : [SetTime]
+    'Stunden ändern 
+    Z3 --> Increment
+    Increment --> setHoursIf : [Z3]
+        'Prüfe Stundenformat
+        'True
+            setHoursIf --> Z3 : stunden(n)[n <= 23]
+        'False
+            setHoursIf --> Reset : stunden(n)[n > 23]
+            Reset --> switchReset : switch[config-item state]
+            switchReset --> Z3 :[Z3]
+    'Ohne Änderung fortfahren
+    Z3 --> Confirm
+    Confirm --> Sound
+    switchCaseBeep --> ConfirmedState : [Z3]
+    ConfirmedState --> switchCaseConfirm : switch[Confirmed State]
+    switchCaseConfirm --> Z4 :[Z3]
+    'Minuten ändern
+    Z4 --> Increment
+    Increment --> setMinutesIf : [Z4]
+        'Prüfe Stundenformat
+        'True
+            setMinutesIf --> Z4 : minuten(n)[n <= 59]
+        'False
+            setMinutesIf --> Reset : minuten(n)[n > 59]
+            switchReset --> Z4 : [Z4]
+    'Ohne Änderung fortfahren
+    Z4 --> Confirm
+    ' Return after Config
+    switchCaseBeep --> ConfirmedState : [Z4]
+    ConfirmedState --> Entrypoint : [Z4]
 
+' SetDate
+switchCaseBeep --> Z5 : [SetDate]
+'Prüfe Jahr
+Z5 --> Increment
+Increment --> setYearIf : [Z5]
+    'Prüfe Stundenformat
+    'True
+        setYearIf --> Z5 : jahr(n)[n <= 3000 || n >= 1985]
+    'False
+        setYearIf --> Reset : jahr(n)[n > 3000 || n < 1985]
+        Reset --> switchReset : switch[config-item state]
+        switchReset --> Z5 :[Z5]
+'Ohne Änderung fortfahren
+Z5 --> Confirm
+switchCaseBeep --> ConfirmedState : [Z5]
+switchCaseConfirm --> Z6 :[Z5]
+'Prüfe Monat
+Z6 --> Increment
+Increment --> setMonthIf : [Z6]
+    'Prüfe Stundenformat
+    'True
+        setMonthIf --> Z5 : monat(n)[n <= 12]
+    'False
+        setMonthIf --> Reset : monat(n)[n > 12]
+        Reset --> switchReset : switch[config-item state]
+        switchReset --> Z6 :[Z6]
+'Ohne Änderung fortfahren
+Z6 --> Confirm
+switchCaseBeep --> ConfirmedState : [Z6]
+switchCaseConfirm --> Z7 :[Z6]
+'Prüfe Tag
+Z7 --> Increment
+Increment --> setDayIf : [Z7]
+    'Prüfe Stundenformat
+    'True
+        setDayIf --> Z7 : tag(n)[n <= 31]
+    'False
+        setDayIf --> Reset : tag(n)[n > 31]
+        Reset --> switchReset : switch[config-item state]
+        switchReset --> Z7 :[Z7]
+'Ohne Änderung fortfahren
+Z7 --> Confirm
+' Return after Config
+switchCaseBeep --> ConfirmedState : [Z7]
+ConfirmedState --> Entrypoint : [Z7]
 @enduml
