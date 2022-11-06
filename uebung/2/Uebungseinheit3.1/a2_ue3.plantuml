@@ -10,8 +10,8 @@ participant "CompletionHandler" as Handler
 ==1==
 Caller -> ES++ : <<create>>
 ES -> AsyncSock++ : new()
-AsyncSock -> AsyncSock++ : open()
-AsyncSock -> AsyncSock++ : bind()
+AsyncSock -> AsyncSock : open()
+AsyncSock -> AsyncSock : bind()
 AsyncSock -> Address++ : new()
 Address -> Address : InetSocketAddress("localhost", 8080)
 Address --> AsyncSock--
