@@ -1,0 +1,30 @@
+@startuml Uebungseinheit 3 - Aufgabe 2
+
+participant "Calling Class" as Caller
+participant "Echoserver" as ES 
+participant "AsynchronousServerSocketChannel" as AsyncSock
+participant "InetSocketAddress" as Address
+participant "serversock" as Magic
+participant "CompletionHandler" as Handler
+
+==1==
+Caller -> ES++ : <<create>>
+ES -> AsyncSock++ : new()
+AsyncSock -> AsyncSock++ : open()
+AsyncSock -> AsyncSock++ : bind()
+AsyncSock -> Address++ : new()
+Address -> Address : InetSocketAddress("localhost", 8080)
+Address --> AsyncSock--
+AsyncSock--
+AsyncSock--
+AsyncSock --> ES
+AsyncSock--
+ES --> Caller
+ES--
+==2==
+Magic --> Magic++ : accept(self, CompletionHandler)
+Magic -> Handler++ : new()
+Handler -> Handler : @Override completed
+Handler -> Handler : @Override failed
+Handler --> Magic
+@enduml
