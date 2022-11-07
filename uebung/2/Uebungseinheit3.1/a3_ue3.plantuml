@@ -1,0 +1,24 @@
+@startuml Uebungseiheit 3 - Aufgabe 3
+
+interface Serializable{
+    equals()
+}
+
+class Person {
+    -id:int 
+    -name:String 
+    -age:int 
+    -{static} l:int
+
+    +^equals():Boolean
+    +getId():id
+    +getName():name
+    +setName(name:String)
+    +getAge():age
+    +setAge(age:int)
+    #isAdult():boolean
+}
+
+Person ..up|> Serializable
+
+@enduml 

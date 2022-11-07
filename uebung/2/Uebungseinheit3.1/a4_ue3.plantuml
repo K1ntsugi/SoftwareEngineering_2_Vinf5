@@ -1,0 +1,19 @@
+@startuml Uebungseiheit 3 - Aufgabe 4
+
+object "__p1:Person__" as p1{
+    Name = "Chris"
+    Alter = 21
+}
+object "__p2:Person__" as p2{
+    Name = "Alex"
+    Alter = 19
+}
+
+map "__persons:List__" as persons{
+    0 => p1
+    1 => p2
+}
+
+persons "1" o--> "1" p1 : teil von
+persons "1" o--> "1" p2 : teil von
+@enduml 
