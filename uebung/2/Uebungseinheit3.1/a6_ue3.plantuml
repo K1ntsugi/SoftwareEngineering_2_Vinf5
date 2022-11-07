@@ -1,0 +1,23 @@
+@startuml Uebungseinheit 3 - Aufgabe 6
+
+abstract class Animal{
+    #name:String 
+    #size:int 
+    +Animal(name:String, size:int)
+    #speak():String 
+}
+
+class Dog{
+    -breed:String
+    +Dog(super(), breed)
+}
+
+class Cat{
+    -color:String 
+    +Dog(super(), color)
+}
+
+Dog --up|> Animal
+Cat --up|> Animal
+
+@enduml
