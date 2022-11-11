@@ -1,0 +1,8 @@
+@startuml Übungseinhet 3 - Aufgabe 12
+
+participant "p1:Point" as alex1
+participant "p1_copy1:Point" as alex2
+participant "p1_copy2:Point" as alex3
+
+
+@enduml 

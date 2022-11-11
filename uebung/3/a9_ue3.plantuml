@@ -1,0 +1,13 @@
+@startuml Übungseinhet 3 - Aufgabe 9
+
+participant "<<class>> \n main" as main
+participant "alex:Person" as alex
+
+main++
+main -> alex++ : <<create>>
+alex -> alex++ : setAge
+alex --> alex-- : <<become>>
+return getAge()
+main--
+
+@enduml 

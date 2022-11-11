@@ -1,0 +1,24 @@
+@startuml Übungseinhet 3 - Aufgabe 11
+
+participant "<<class>> \n main" as main
+participant "alex:Person" as alex1
+participant "chris:Person" as alex2
+participant "alex:Person" as alex3
+
+main++
+main -> alex1++ : <<create>>
+
+alex1 -> alex1++ : setName
+alex1 -> alex2++ :  <<create>>
+alex1 --> alex1--
+
+alex1 -> alex1++ : setAge
+alex1 -> alex3++ :  <<create>>
+alex3 --> main : getAge
+alex2--
+alex3--
+alex1--
+alex1--
+main--
+
+@enduml 

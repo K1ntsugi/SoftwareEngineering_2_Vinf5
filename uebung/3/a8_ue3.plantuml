@@ -1,0 +1,18 @@
+@startuml Übungseinhet 3 - Aufgabe 8
+
+class "Calculator Test" as calc{}
+class "BasicCaclulator<T Class<T Class>>" as baseCalc <<static>>{
+    #val:double
+    +BasicCaclulator(val:double)
+    +add(operand:double):T
+}
+class "ScientificCalculator<T Class<T Class>>" as sicCalc <<static>>{
+    +ScientificCalculator(val:double)
+    +sin():T
+}
+
+
+calc +-- baseCalc
+calc +--down sicCalc
+sicCalc --right|> baseCalc
+@enduml 
