@@ -1,0 +1,34 @@
+@startuml Übungseinhet 3 - Aufgabe 7
+
+class Object{}
+class "AbstractCollection<T Class>" as AC{}
+class "AbstractList<T Class>" as AL{}
+class "ArrayList<T Class>" as ArrL{
+  -index:int
+  -element:T
+  -t:T
+
+  +ArrayList<T>()
+  +get(index:int)
+  +set(index:int, element:T)
+  +add(t:T)
+  +add(index:int, t:T)
+  +remove(t:T)
+  +remove(index:int, t:T)
+  +clear()
+  +isEmpty():boolean
+  +size():int
+  +iterator()
+}
+
+interface "Iterable<T Class>" as i_iter
+interface "Collection<T Class>" as i_coll
+interface "List<T Class>" as i_lst
+
+AC --up|> Object
+AL --up|> AC
+ArrL --up|> AL
+ArrL ..|> i_iter
+ArrL ..|> i_coll
+ArrL ..|> i_lst
+@enduml 
