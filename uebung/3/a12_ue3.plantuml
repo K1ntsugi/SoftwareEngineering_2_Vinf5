@@ -1,8 +1,82 @@
-@startuml Übungseinhet 3 - Aufgabe 12
+@startuml Übung 4a Übungseinheit 3 Aufgabe 12
 
-participant "p1:Point" as alex1
-participant "p1_copy1:Point" as alex2
-participant "p1_copy2:Point" as alex3
+participant "Main" as main
+participant "p1 : Point" as point
+participant "p1_copy1 : Point" as copy1
+participant "p1_copy2 : Point" as copy2
+
+[-> main : Start des Programmes
+activate main
+
+create point
+main -> point : <<create>>
+
+create copy1
+main -> copy1 : <<create>>
+activate copy1
 
 
-@enduml 
+
+copy1 -> point : get x
+activate point
+return 1.0
+copy1 -> point : get y
+activate point
+return 2.0
+copy1 -> point : get comment
+activate point
+return null
+deactivate copy1
+
+main -> main : isIdentical(p1, p1_copy1)
+activate main
+return false
+
+main -> main : isSame(p1, p1_copy1)
+activate main
+main -> point : get x
+activate point
+return 1.0
+main -> copy1 : get x
+activate copy1
+return 1.0
+main -> point : get y
+activate point
+return 2.0
+main -> copy1 : get y
+activate copy1
+return 2.0
+return true
+
+create copy2
+main -> copy2 : <<create>>
+activate copy2
+
+copy2 -> point : get x
+activate point
+return 1.0
+
+copy2 -> point : get y
+activate point
+return 2.0
+
+copy2 -> point : get comment
+activate point
+return null
+deactivate copy2
+
+main -> main : isIdentical(p1, p1_copy2)
+activate main
+return false
+
+main -> main : isSame(p1, p1_copy2)
+activate main
+main -> point : get x
+activate point
+return 1.0
+main -> copy2 : get x
+activate copy2
+return 4.0
+return false
+
+@enduml
