@@ -1,0 +1,50 @@
+@startuml Use-case-modell für die ToDo-App 
+
+skinparam actorStyle awesome
+actor "User" as usr
+actor "Admin" as adm
+actor "Database" as db
+
+
+package System {
+    package "User administration" as pUsrAdm {
+        (Register) as (reg) 
+        (Login) as (lin)  
+        (Logout) as (lout)
+        (Password reset) as (pwres) 
+        (Logging) as (Log)
+    }
+
+    package "Core" as core {
+        (Manage ToDos) as (mToDo)
+        (Display agenda) as (shAgenda) 
+        (Delete item) as (delItem) 
+        (Create item) as (mkItem)
+    }
+
+    package "Data" as data{
+        (Manage Database) as (mDB)
+        (Push to Database) as (pshDB)
+        (Pull from Database) as (pllDB)
+    }
+}
+
+Log <|-- reg 
+Log <|-- lin 
+Log <|-- lout
+Log <|-- pwres
+reg <.. pwres : <<include>>
+Log <.. mDB : <<include>>
+adm -- Log
+
+mToDo <.. shAgenda : <<include>>
+mToDo <.. delItem : <<include>>
+mToDo <.. mkItem : <<include>>
+mToDo -- usr
+
+
+shAgenda <.. pllDB : <<include>>
+delItem <.. pshDB : <<include>>
+mkItem <..pshDB : <<include>>
+mDB -up-- db
+@enduml
