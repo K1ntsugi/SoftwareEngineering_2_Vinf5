@@ -1,0 +1,12 @@
+@startuml Systemarchitektur 
+
+node "User Device" as usr {
+    artifact "Animalcare App" as app
+    database "Google Cloud Firestore Locale" as bcknd_loc
+    app -0)- bcknd_loc
+}
+
+cloud "Google Cloud Firestore" as bcknd_cloud
+
+usr -----left0)----- bcknd_cloud
+@enduml

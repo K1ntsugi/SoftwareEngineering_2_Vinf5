@@ -1,0 +1,21 @@
+@startuml Systemarchitektur Sequenzdiagramm
+
+participant "User Device 1" as dev1
+participant "User Device 2 - Snapshot Listener" as dev2
+participant "Google Cloud Firestore" as bcknd
+
+dev1++
+dev1 -> dev1 : Daten geändert
+dev1 --> bcknd : push_data_changed()
+dev1--
+
+bcknd++
+bcknd -> bcknd : Update Tables
+bcknd --> dev2 : update_snapshot_listener
+
+dev2++
+dev2 -> dev2 : notify_user
+dev2--
+
+
+@enduml

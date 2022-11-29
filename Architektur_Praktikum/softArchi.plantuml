@@ -1,0 +1,31 @@
+@startuml Software Architektur
+interface "Cloud Firestore" as firestore
+interface "Rendering Components" as components
+
+package "Components" as cmp{
+    [Appointment]
+    [Calendar]
+    [Login]
+    [Profile]
+    [Register]
+}
+
+package "React" as front{
+    [App] --> firestore
+    [App] --> components
+    components -- cmp
+}
+
+database "Backend" as backnd{
+    backnd -- firestore
+    [Authentication]
+    [User Data]
+
+    note left of [User Data]
+        Datenmodell tbd
+    end note
+}
+
+
+
+@enduml
