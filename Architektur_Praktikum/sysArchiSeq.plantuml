@@ -15,7 +15,7 @@ bcknd --> dev2 : update_snapshot_listener
 
 dev2++
 dev2 -> dev2 : notify_user
-dev2--
+
 
 
 @enduml
