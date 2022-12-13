@@ -1,0 +1,30 @@
+@startuml Database 
+
+entity f_authentication {
+    * NutzerID (PK)
+    --
+    * Kennung
+    * Anbieter
+    * Erstellt
+    * Angemeldet
+}
+
+entity homes {
+    * HomeID (PK)
+    --
+    * HouseName
+    * Users (FK)
+}
+
+entity appointments {
+    * owner (FK)
+    --
+    * title (PK)
+    * description
+    * nextOccurence 
+    * repetition
+}
+
+f_authentication }|--o{ appointments
+appointments }|--o| homes
+@enduml
