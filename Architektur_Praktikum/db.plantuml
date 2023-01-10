@@ -1,7 +1,7 @@
 @startuml Database 
 
 entity f_authentication {
-    * NutzerID (PK)
+    * NutzerID (used as Primary Key)
     --
     * Kennung
     * Anbieter
@@ -9,22 +9,30 @@ entity f_authentication {
     * Angemeldet
 }
 
-entity homes {
-    * HomeID (PK)
-    --
-    * HouseName
-    * Users (FK)
+entity admin {
+    * adminDocumentID
+}
+
+entity adminDocument{
+    * isAdmin
 }
 
 entity appointments {
-    * owner (FK)
-    --
-    * title (PK)
-    * description
-    * nextOccurence 
-    * repetition
+    * appointmentDocumentID
 }
 
-f_authentication }|--o{ appointments
-appointments }|--o| homes
+entity appointmentDocument {
+    * description
+    * nextOccurence
+    * owner
+    * repetiton
+    * title
+}
+
+
+admin ||--|{ adminDocument
+appointments ||--|{ appointmentDocument
+appointmentDocument ||--|| f_authentication
+f_authentication ||--|| adminDocument
+
 @enduml
